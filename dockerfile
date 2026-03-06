@@ -16,7 +16,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install semua dependencies (proses compile akan terjadi di sini)
-RUN npm install
+# Tambahkan flag --legacy-peer-deps untuk mengabaikan tabrakan versi
+RUN npm install --legacy-peer-deps
 
 # Salin semua file bot kamu ke dalam kontainer
 COPY . .
