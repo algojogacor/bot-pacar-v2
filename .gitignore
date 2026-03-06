@@ -1,0 +1,6 @@
+node_modules/
+.env
+data/auth/
+data/memory.db
+data/vector_store/
+*.log
