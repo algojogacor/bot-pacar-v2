@@ -1,25 +1,25 @@
-# Gunakan image Node.js versi terbaru yang stabil (berbasis Linux)
+# Gunakan image Node.js versi terbaru yang stabil
 FROM node:20-slim
 
-# Install tools yang dibutuhkan untuk mengompilasi modul C++ (seperti hnswlib)
+# Tambahkan 'git' ke dalam daftar instalasi
 RUN apt-get update && apt-get install -y \
     python3 \
     make \
     g++ \
     build-essential \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
-# Tentukan folder kerja di dalam kontainer
+# Tentukan folder kerja
 WORKDIR /app
 
-# Salin file package.json (dan lockfile jika ada)
+# Salin file package.json
 COPY package*.json ./
 
-# Install semua dependencies (proses compile akan terjadi di sini)
-# Tambahkan flag --legacy-peer-deps untuk mengabaikan tabrakan versi
+# Install dengan flag legacy-peer-deps
 RUN npm install --legacy-peer-deps
 
-# Salin semua file bot kamu ke dalam kontainer
+# Salin semua file bot
 COPY . .
 
 # Jalankan bot
